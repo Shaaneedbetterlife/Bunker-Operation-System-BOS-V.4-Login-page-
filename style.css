@@ -1,0 +1,768 @@
+:root {
+  --navy-dark: #03142c;
+  --blue: #1976d2;
+  --blue-dark: #135aa6;
+  --white: #ffffff;
+  --text: #172b42;
+  --muted: #718196;
+  --border: #dbe4ee;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  overflow: hidden;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  background: var(--navy-dark);
+}
+
+.page-shell {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(500px, 0.75fr);
+  width: 100%;
+  height: 100dvh;
+  min-height: 560px;
+  overflow: hidden;
+  background: #03142c;
+}
+
+/* BACKGROUND VIDEO */
+
+.video-stage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #03142c;
+}
+
+.video-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: cover;
+  object-position: center;
+
+  transform: scale(1.025);
+  filter: saturate(1.05) contrast(1.03) brightness(1.5);
+}
+
+.loop-mask {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+
+  opacity: 0;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      rgba(20, 74, 130, 0.16) 0%,
+      rgba(4, 22, 52, 0.58) 55%,
+      rgba(1, 10, 28, 0.88) 100%
+    ),
+    linear-gradient(135deg, rgba(3, 18, 44, 0.16), rgba(1, 10, 28, 0.82));
+
+  transition: opacity 1.05s cubic-bezier(0.4, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.loop-mask.is-visible {
+  opacity: 1;
+}
+
+/* BACKGROUND OVERLAY */
+
+.video-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(2, 14, 38, 0.8) 0%,
+      rgba(2, 14, 38, 0.55) 28%,
+      rgba(2, 14, 38, 0.26) 49%,
+      rgba(2, 14, 38, 0.2) 66%,
+      rgba(2, 14, 38, 0.64) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(3, 15, 38, 0.08) 0%,
+      rgba(3, 15, 38, 0.22) 62%,
+      rgba(1, 8, 23, 0.62) 100%
+    );
+
+  pointer-events: none;
+}
+
+.video-vignette {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+
+  pointer-events: none;
+
+  background:
+    radial-gradient(
+      ellipse at center,
+      transparent 30%,
+      rgba(1, 10, 28, 0.2) 72%,
+      rgba(1, 8, 24, 0.58) 100%
+    ),
+    radial-gradient(circle at 18% 24%, rgba(41, 135, 239, 0.2), transparent 30%);
+}
+
+/* BAGIAN KIRI DESKTOP */
+
+.showcase-section {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  min-width: 0;
+  padding: 54px 44px 54px 72px;
+
+  color: var(--white);
+}
+
+.showcase-content {
+  width: min(100%, 760px);
+}
+
+.showcase-title {
+  max-width: 760px;
+  margin: 0 0 26px;
+
+  font-size: clamp(95px, 7.4vw, 110px);
+  font-weight: 800;
+  line-height: 0.9;
+  letter-spacing: -2.5px;
+}
+
+.title-line {
+  display: block;
+  color: #ffffff;
+}
+
+.title-line-version {
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(10px, 1.3vw, 18px);
+}
+
+.title-accent {
+  color: transparent;
+
+  background: linear-gradient(180deg, #9bd9ff 0%, #5aa9ff 45%, #256ee8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  text-shadow: 0 0 14px rgba(79, 149, 255, 0.18);
+}
+
+/* BOS V.4 BADGE */
+
+.version-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: clamp(6px, 0.8vw, 12px);
+  padding: clamp(5px, 0.5vw, 7px) clamp(9px, 0.9vw, 14px);
+
+  border: 2px solid rgba(143, 211, 255, 0.72);
+  border-radius: clamp(9px, 0.8vw, 13px);
+
+  color: #ffffff;
+  background: rgba(4, 30, 70, 0.36);
+
+  box-shadow:
+    0 0 18px rgba(80, 155, 255, 0.18),
+    inset 0 0 12px rgba(255, 255, 255, 0.06);
+
+  backdrop-filter: blur(8px);
+
+  font-size: clamp(12px, 1vw, 18px);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.2px;
+  white-space: nowrap;
+}
+
+.main-description {
+  max-width: 610px;
+  margin: 0;
+
+  color: rgba(255, 255, 255, 0.9);
+
+  font-size: clamp(16px, 1.2vw, 20px);
+  font-weight: 500;
+  line-height: 1.6;
+}
+
+.main-description-company {
+  display: block;
+  margin-top: 12px;
+}
+
+.main-description-company strong {
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.white-stripe {
+  display: flex;
+
+  width: min(34vw, 530px);
+  height: 5px;
+  margin-top: 24px;
+
+  overflow: hidden;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.96);
+  box-shadow: 0 0 18px rgba(255, 255, 255, 0.28);
+}
+
+.white-stripe span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+}
+
+/* BAGIAN LOGIN */
+
+.login-section {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 100%;
+  padding: 18px 72px 18px 0;
+
+  background: linear-gradient(
+    90deg,
+    rgba(3, 18, 44, 0.08) 0%,
+    rgba(3, 18, 44, 0.44) 100%
+  );
+}
+
+/* TITLE MOBILE / TABLET */
+
+.mobile-login-title {
+  display: none;
+}
+
+.mobile-title-line {
+  display: block;
+  color: #ffffff;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 430px;
+  max-height: calc(100dvh - 52px);
+
+  padding: 34px 32px 30px;
+
+  overflow: auto;
+
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  border-radius: 26px;
+
+  background: rgba(255, 255, 255, 0.97);
+
+  box-shadow:
+    0 25px 75px rgba(0, 15, 42, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.login-card::-webkit-scrollbar {
+  width: 0;
+}
+
+/* FORM */
+
+.form-group {
+  margin-bottom: 18px;
+}
+
+.form-group label {
+  display: block;
+
+  margin-bottom: 8px;
+
+  color: var(--text);
+
+  font-size: 13px;
+  font-weight: 800;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  left: 18px;
+
+  color: #7e91a6;
+
+  font-size: 16px;
+
+  transform: translateY(-50%);
+}
+
+.input-container input {
+  width: 100%;
+  height: 52px;
+
+  padding: 0 52px;
+
+  border: 1px solid var(--border);
+  border-radius: 11px;
+  outline: none;
+
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.96);
+
+  font-size: 14px;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.input-container input::placeholder {
+  color: #9aa8b7;
+}
+
+.input-container input:focus {
+  border-color: var(--blue);
+  background: #ffffff;
+  box-shadow: 0 0 0 4px rgba(25, 118, 210, 0.12);
+}
+
+.show-password-button {
+  position: absolute;
+  top: 50%;
+  right: 0;
+
+  width: 52px;
+  height: 52px;
+
+  border: 0;
+  border-left: 1px solid var(--border);
+  border-radius: 0 11px 11px 0;
+
+  color: #7e91a6;
+  background: transparent;
+
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.show-password-button:hover {
+  color: var(--blue);
+  background: #edf5ff;
+}
+
+.form-group small {
+  display: block;
+
+  margin-top: 7px;
+
+  color: #7e8896;
+
+  font-size: 11.5px;
+  line-height: 1.4;
+}
+
+.login-options {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  margin: 4px 0 20px;
+}
+
+.remember-option {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  color: #526174;
+
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.remember-option input {
+  width: 16px;
+  height: 16px;
+
+  accent-color: var(--blue);
+}
+
+/* BUTTON */
+
+.login-button,
+.idaman-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+
+  width: 100%;
+  min-height: 52px;
+
+  border-radius: 10px;
+
+  font-size: 15px;
+  font-weight: 800;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.login-button {
+  border: 0;
+
+  color: #ffffff;
+  background: linear-gradient(135deg, #2387e7, #0f61b6);
+
+  box-shadow: 0 12px 26px rgba(22, 131, 247, 0.28);
+}
+
+.login-button:hover {
+  box-shadow: 0 16px 34px rgba(22, 131, 247, 0.36);
+  transform: translateY(-2px);
+}
+
+.login-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.75;
+  transform: none;
+}
+
+.divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 18px 0;
+
+  color: #9aa8b7;
+
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.2px;
+}
+
+.divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.idaman-button {
+  border: 1px solid #273442;
+
+  color: #ffffff;
+  background: #263645;
+
+  box-shadow: 0 10px 22px rgba(38, 54, 69, 0.2);
+}
+
+.idaman-button:hover {
+  background: #1f2c39;
+  box-shadow: 0 14px 28px rgba(38, 54, 69, 0.27);
+  transform: translateY(-2px);
+}
+
+.idaman-logo {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.idaman-fallback {
+  align-items: center;
+  justify-content: center;
+
+  width: 32px;
+  height: 32px;
+
+  border-radius: 4px;
+
+  color: #ffffff;
+  background: #1683f7;
+
+  font-size: 12px;
+  font-weight: 800;
+}
+
+/* TABLET DAN HP */
+
+@media (max-width: 1080px) {
+  body {
+    overflow-y: auto;
+  }
+
+  .page-shell {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .video-stage,
+  .video-overlay,
+  .video-vignette {
+    position: fixed;
+  }
+
+  .showcase-section {
+    display: none;
+  }
+
+  .login-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 100vh;
+
+    gap: 24px;
+    padding: 34px 24px 58px;
+
+    background: transparent;
+  }
+
+  .mobile-login-title {
+    display: block;
+
+    width: 100%;
+    max-width: 430px;
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: clamp(44px, 7vw, 66px);
+    font-weight: 800;
+    line-height: 0.9;
+    letter-spacing: -2px;
+
+    text-shadow: 0 14px 32px rgba(0, 12, 35, 0.42);
+  }
+
+  .mobile-login-title .title-line-version {
+    gap: 12px;
+  }
+
+  .mobile-login-title .version-badge {
+    margin-bottom: 6px;
+    padding: 5px 10px;
+
+    border-width: 1.5px;
+    border-radius: 10px;
+
+    font-size: 12px;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 430px;
+    max-height: none;
+    overflow: visible;
+  }
+}
+
+/* HP */
+
+@media (max-width: 520px) {
+  .page-shell {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .video-background {
+    object-position: center;
+    transform: scale(1.08);
+  }
+
+  .video-overlay {
+    background: linear-gradient(
+      180deg,
+      rgba(2, 14, 38, 0.78) 0%,
+      rgba(2, 14, 38, 0.68) 45%,
+      rgba(1, 8, 23, 0.82) 100%
+    );
+  }
+
+  .login-section {
+    justify-content: center;
+
+    min-height: 100vh;
+    gap: 18px;
+    padding: 24px 18px 54px;
+  }
+
+  .mobile-login-title {
+    max-width: 100%;
+
+    font-size: clamp(34px, 12vw, 48px);
+    line-height: 0.9;
+    letter-spacing: -1.5px;
+  }
+
+  .mobile-login-title .title-line-version {
+    gap: 9px;
+  }
+
+  .mobile-login-title .version-badge {
+    margin-bottom: 4px;
+    padding: 4px 8px;
+
+    border-radius: 9px;
+
+    font-size: 10px;
+  }
+
+  .login-card {
+    width: 100%;
+    max-width: 100%;
+    padding: 28px 22px;
+    border-radius: 20px;
+  }
+
+  .form-group {
+    margin-bottom: 16px;
+  }
+
+  .form-group label {
+    font-size: 13px;
+  }
+
+  .input-container input {
+    height: 50px;
+    padding: 0 48px;
+    font-size: 14px;
+  }
+
+  .input-icon {
+    left: 16px;
+    font-size: 15px;
+  }
+
+  .show-password-button {
+    width: 50px;
+    height: 50px;
+  }
+
+  .form-group small {
+    font-size: 11px;
+  }
+
+  .login-options {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 10px;
+    margin: 2px 0 18px;
+  }
+
+  .remember-option {
+    font-size: 13px;
+  }
+
+  .login-button,
+  .idaman-button {
+    min-height: 50px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  .divider {
+    margin: 16px 0;
+    font-size: 9px;
+  }
+
+  .idaman-logo,
+  .idaman-fallback {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* HP KECIL */
+
+@media (max-width: 380px) {
+  .login-section {
+    gap: 14px;
+    padding: 18px 14px 48px;
+  }
+
+  .mobile-login-title {
+    font-size: 34px;
+  }
+
+  .mobile-login-title .version-badge {
+    font-size: 9px;
+    padding: 4px 7px;
+  }
+
+  .login-card {
+    padding: 24px 18px;
+    border-radius: 18px;
+  }
+
+  .input-container input {
+    height: 48px;
+  }
+
+  .show-password-button {
+    width: 48px;
+    height: 48px;
+  }
+
+  .login-button,
+  .idaman-button {
+    min-height: 48px;
+  }
+}
